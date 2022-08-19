@@ -1,7 +1,7 @@
 {
   "name": "@acomsys/dash-utils",
   "version": "0.0.14",
-  "description": "A set of utilities used by the [acomsys dash](https://github.com/acomsys/dash) project.",
+  "description": "A set of utilities used by the acomsys dash project.",
   "scripts": {
     "test": "vitest run",
     "coverage": "vitest run --coverage",
