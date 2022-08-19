@@ -1,0 +1,10 @@
+{
+  "prettier.configPath": ".prettierrc.js",
+  "eslint.alwaysShowStatus": true,
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.ts": "typescript",
+    "*.xsd": "xsl",
+    "ios": "cpp"
+  }
+}

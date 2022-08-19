@@ -1,0 +1,59 @@
+{
+  "name": "@acomsys/dash-utils",
+  "version": "0.0.14",
+  "description": "A set of utilities used by the [acomsys dash](https://github.com/acomsys/dash) project.",
+  "scripts": {
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "build": "node-gyp configure && node-gyp build && npm run build:ts",
+    "build:ts": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "pregyp": "node-pre-gyp rebuild && node-pre-gyp package publish",
+    "install": "node-pre-gyp install --fallback-to-build",
+    "prepublish": "npm run build:ts"
+  },
+  "author": "Bangonkali <bangonkali@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^5.0.0",
+    "@mapbox/node-pre-gyp": "^1.0.9"
+  },
+  "binary": {
+    "module_name": "dash_utils",
+    "module_path": "./build/Release",
+    "bucket": "builds.acomsys.net",
+    "region": "ap-southeast-1",
+    "host": "https://s3.ap-southeast-1.amazonaws.com"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1198.0",
+    "nan": "^2.16.0",
+    "node-gyp": "^9.1.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.8",
+    "vitest": "^0.22.1"
+  },
+  "gypfile": true,
+  "main": "dist/lib/cjs/index.js",
+  "module": "dist/lib/esm/index.js",
+  "files": [
+    "/dist",
+    "/src",
+    "binding.gyp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acomsys/dash-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/acomsys/dash-utils/issues"
+  },
+  "keywords": [
+    "dash-utils",
+    "tree",
+    "manipulation",
+    "mutation",
+    "flatten"
+  ],
+  "homepage": "https://github.com/acomsys/dash-utils#readme"
+}
