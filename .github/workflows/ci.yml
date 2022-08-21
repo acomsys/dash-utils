@@ -54,14 +54,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to Github Release
-        if: github.ref == 'refs/heads/main'
-        run: npm run upload
-        env:
-          PREBUILD_TOKEN: ${{ secrets.PREBUILD_TOKEN }}
-
       - name: Test
         run: npm run test
+
+      - name: Upload Binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-${{ matrix.os }}-binary
+          path: prebuilds/@acomsys/*
 
   deploy:
 
@@ -95,8 +95,19 @@ jobs:
       - name: Install Depedendencies
         run: npm ci
 
-      - name: Deploy to npm
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          access: "public"
-          token: ${{ secrets.NPM_TOKEN }}
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        # with:
+        #   path: path/to/artifact
+
+      - name: Check artifacts
+        run: |
+          ls -lha .
+          ls -lha prebuilds
+          ls -lha prebuilds/@acomsys
+
+      # - name: Deploy to npm
+      #   uses: JS-DevTools/npm-publish@v1
+      #   with:
+      #     access: "public"
+      #     token: ${{ secrets.NPM_TOKEN }}
