@@ -107,10 +107,8 @@ jobs:
         run: |
           mkdir -p prebuilds/@acomsys
           find artifacts -mindepth 2 -type f -print -exec mv {} prebuilds/@acomsys \;
-          ls -lha .
-          ls -lha prebuilds
-          ls -lha artifacts
           ls -lha prebuilds/@acomsys
+          npm run upload
 
       # - name: Deploy to npm
       #   uses: JS-DevTools/npm-publish@v1
