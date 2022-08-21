@@ -100,15 +100,12 @@ jobs:
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
-        # with:
-        #   path: path/to/artifact
+        with:
+          path: prebuilds/@acomsys
 
       - name: Check artifacts
         run: |
           ls -lha .
-          ls -lha artifact-macos-latest-binary
-          ls -lha artifact-ubuntu-latest-binary
-          ls -lha artifact-windows-latest-binary
           ls -lha prebuilds
           ls -lha prebuilds/@acomsys
 
