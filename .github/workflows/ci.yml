@@ -2,9 +2,17 @@ name: CI
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+      - feature/*
+      - migration/*
+      - hotfix/*
   pull_request:
-    branches: ["main"]
+    branches: 
+      - main
+      - feature/*
+      - migration/*
+      - hotfix/*
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -32,6 +40,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: "package-lock.json"
 
+      - name: Setup CMake
+        uses: lukka/get-cmake@v3.24.1
+
       - name: Setup python
         uses: actions/setup-python@v4
         with:
@@ -46,11 +57,11 @@ jobs:
       - name: Test
         run: npm run test
 
-      - name: Publish to AWS
-        run: npm run pregyp
+      - name: Publish to Github Release
+        if: github.ref == 'refs/heads/main'
+        run: npm run upload
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PREBUILD_TOKEN: ${{ secrets.PREBUILD_TOKEN }}
 
   deploy:
 
@@ -59,6 +70,8 @@ jobs:
     needs: [build]
 
     runs-on: 'ubuntu-latest'
+
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Clone

@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${env:NODE_GYP}"
+                "${env:NODE_HOME}"
             ],
             "defines": [
                 "_DEBUG",
