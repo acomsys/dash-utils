@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.23.2)
 cmake_policy(SET CMP0042 NEW)
 set (CMAKE_CXX_STANDARD 23)
 set (CXX_STANDARD_REQUIRED true)
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/Release)
 
 add_compile_definitions(NAPI_VERSION=8)
 
@@ -61,7 +60,10 @@ elseif(UNIX)
 endif()
 
 # You should add this line in every CMake.js based project
-target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
+target_link_libraries(${PROJECT_NAME} 
+  ${CMAKE_JS_LIB}
+  fmt::fmt-header-only
+)
 
 # Include
 target_include_directories(${PROJECT_NAME} PRIVATE
