@@ -1,45 +1,47 @@
 {
   "name": "@acomsys/dash-utils",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A set of utilities used by the acomsys dash project.",
   "scripts": {
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "build": "node-gyp configure && node-gyp build && npm run build:ts",
+    "build": "npm run prebuild && npm run build:ts",
     "build:ts": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "pregyp": "node-pre-gyp rebuild && node-pre-gyp package publish",
-    "install": "node-pre-gyp install --fallback-to-build",
-    "prepublish": "npm run build:ts"
+    "build:cmake": "rm -rf build && cmake-js build",
+    "prepublish": "npm run build:ts",
+    "install": "prebuild-install --backend cmake-js --runtime napi || npm run rebuild",
+    "rebuild": "npm run build:cmake",
+    "prebuild": "prebuild --backend cmake-js --runtime napi --all --strip --verbose",
+    "upload": "prebuild --backend cmake-js --runtime napi --all --strip --verbose --upload ${PREBUILD_TOKEN}"
   },
   "author": "Bangonkali <bangonkali@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "bindings": "^1.5.0",
+    "cmake-js": "^6.3.2",
     "node-addon-api": "^5.0.0",
-    "@mapbox/node-pre-gyp": "^1.0.9"
-  },
-  "binary": {
-    "module_name": "dash_utils",
-    "module_path": "./build/Release",
-    "bucket": "builds.acomsys.net",
-    "region": "ap-southeast-1",
-    "host": "https://s3.ap-southeast-1.amazonaws.com"
+    "prebuild-install": "^7.1.1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.1198.0",
-    "nan": "^2.16.0",
-    "node-gyp": "^9.1.0",
+    "prebuild": "^11.0.4",
     "typescript": "^4.7.4",
     "vite": "^3.0.8",
     "vitest": "^0.22.1"
   },
-  "gypfile": true,
+  "binary": {
+    "napi_versions": [8]
+  },
   "main": "dist/lib/cjs/index.js",
   "module": "dist/lib/esm/index.js",
   "files": [
+    "tsconfig-cjs.json",
+    "vite.config.ts",
+    "CMakeLists.txt",
+    "tsconfig.json",
+    ".node-version",
+    ".npmrc",
     "/dist",
-    "/src",
-    "binding.gyp"
+    "/src"
   ],
   "repository": {
     "type": "git",
