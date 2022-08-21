@@ -10,9 +10,10 @@ project (dash_utils)
 
 # Build a shared library named after the project from the files in `src/`
 file( GLOB SOURCE_FILES 
-    "src/native/module.cc"
-    "src/native/greeter/greeter.cc"
-    "src/native/hello/hello.cc"
+  src/native/module.cc
+  src/native/greeter/greeter.cc
+  src/native/hello/hello.cc
+  src/native/hello/hello_test.cc
 )
 
 # Dependencies
@@ -39,4 +40,5 @@ target_link_libraries(
 )
 
 include(GoogleTest)
+
 gtest_discover_tests(hello_test)
