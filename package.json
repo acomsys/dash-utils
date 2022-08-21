@@ -12,7 +12,7 @@
     "install": "prebuild-install --backend cmake-js --runtime napi || npm run rebuild",
     "rebuild": "npm run build:cmake",
     "prebuild": "prebuild --backend cmake-js --runtime napi --all --strip --verbose",
-    "upload": "prebuild --backend cmake-js --runtime napi --all --strip --verbose --upload-all"
+    "upload": "prebuild --backend cmake-js --runtime napi --all --strip --verbose --upload-all ${GITHUB_TOKEN}"
   },
   "author": "Bangonkali <bangonkali@gmail.com>",
   "license": "Apache-2.0",

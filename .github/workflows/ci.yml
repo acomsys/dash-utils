@@ -111,6 +111,8 @@ jobs:
 
       - name: Upload artifcats
         run: npm run upload
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to npm
         uses: JS-DevTools/npm-publish@v1
