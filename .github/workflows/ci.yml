@@ -103,15 +103,17 @@ jobs:
         with:
           path: artifacts
 
-      - name: Check artifacts
-        run: |
-          mkdir -p prebuilds/@acomsys
-          find artifacts -mindepth 2 -type f -print -exec mv {} prebuilds/@acomsys \;
-          ls -lha prebuilds/@acomsys
-          npm run upload
+      - name: Move artifacts
+        run: find artifacts -mindepth 2 -type f -print -exec mv {} prebuilds/@acomsys \;
 
-      # - name: Deploy to npm
-      #   uses: JS-DevTools/npm-publish@v1
-      #   with:
-      #     access: "public"
-      #     token: ${{ secrets.NPM_TOKEN }}
+      - name: Setup Github Token
+        run: echo "upload=${{ secrets.GITHUB_TOKEN }}" > .prebuildrc
+
+      - name: Upload artifcats
+        run: npm run upload
+
+      - name: Deploy to npm
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          access: "public"
+          token: ${{ secrets.NPM_TOKEN }}
