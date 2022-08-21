@@ -54,14 +54,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: npm run test
-
       - name: Publish to Github Release
         if: github.ref == 'refs/heads/main'
         run: npm run upload
         env:
           PREBUILD_TOKEN: ${{ secrets.PREBUILD_TOKEN }}
+
+      - name: Test
+        run: npm run test
 
   deploy:
 
