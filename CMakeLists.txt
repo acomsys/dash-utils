@@ -13,9 +13,9 @@ include_directories(${CMAKE_JS_INC})
 
 # Build a shared library named after the project from the files in `src/`
 file( GLOB SOURCE_FILES 
-    "src/native/module.cc",
-    "src/native/greeter/greeter.cc",
-    "src/native/hello/hello.cc",
+    "src/native/module.cc"
+    "src/native/greeter/greeter.cc"
+    "src/native/hello/hello.cc"
 )
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
@@ -41,7 +41,7 @@ elseif(UNIX)
 endif()
 
 # You should add this line in every CMake.js based project
-target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${CMAKE_JS_LIB})
 
 # Include N-API wrappers
 execute_process(COMMAND node -p "require('node-addon-api').include"
