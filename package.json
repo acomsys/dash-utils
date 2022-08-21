@@ -1,6 +1,6 @@
 {
   "name": "@acomsys/dash-utils",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "A set of utilities used by the acomsys dash project.",
   "scripts": {
     "test": "npm run ntest && npm run gtest",
