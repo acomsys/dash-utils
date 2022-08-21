@@ -93,7 +93,7 @@ jobs:
           python-version: "3.10"
 
       - name: Prep artifact directory
-        run: prebuilds/@acomsys
+        run: mkdir -p prebuilds/@acomsys
 
       - name: Install Depedendencies
         run: npm ci
