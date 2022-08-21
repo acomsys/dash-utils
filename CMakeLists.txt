@@ -38,7 +38,6 @@ elseif(APPLE)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 elseif(UNIX)
-    message("https://cmake.org/cmake/help/latest/variable/UNIX.html?highlight=unix")
 endif()
 
 # You should add this line in every CMake.js based project
@@ -59,3 +58,4 @@ add_definitions(-DNAPI_EXPERIMENTAL)
 
 # Dependencies
 include(./cmake/fmt.cmake)
+include(./cmake/gtest.cmake)
