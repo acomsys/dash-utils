@@ -41,7 +41,7 @@ jobs:
           cache-dependency-path: "package-lock.json"
 
       - name: Setup CMake
-        uses: lukka/get-cmake@v3.24.1
+        uses: lukka/get-cmake@v3.23.2
 
       - name: Setup python
         uses: actions/setup-python@v4
