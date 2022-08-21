@@ -5,4 +5,6 @@ FetchContent_Declare(fmt
     GIT_TAG        9.0.0
 )
 
-FetchContent_MakeAvailable(fmt)
+FetchContent_Populate(fmt)
+
+add_subdirectory(build/_deps/fmt-src EXCLUDE_FROM_ALL)
