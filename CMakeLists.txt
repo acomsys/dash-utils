@@ -55,3 +55,4 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${NODE_ADDON_API_DIR})
 
 # Definitions
 add_definitions(-DNAPI_DISABLE_CPP_EXCEPTIONS)
+add_definitions(-DNAPI_EXPERIMENTAL)
