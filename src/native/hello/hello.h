@@ -2,4 +2,4 @@
 
 #include "napi.h"
 
-Napi::String Method(const Napi::CallbackInfo &info);
+Napi::String HelloMethod(const Napi::CallbackInfo &info);

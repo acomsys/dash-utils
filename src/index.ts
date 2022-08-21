@@ -1,13 +1,16 @@
 import { load } from './loader';
-import { IGreeter } from './native/greeter/greeter';
-import { IHello } from './native/hello/hello';
+// import { IGreeter } from './native/greeter/greeter';
+// import { IHello } from './native/hello/hello';
 
 type IDashUtilsModule = {
-    Greeter: IGreeter;
-    hello: IHello;
+    increment(): number;
+    subobject: {
+        decrement(): number;
+    }
+    new(): IDashUtilsModule;
 }
 
-const dashUtils = load<IDashUtilsModule>('dash_utils');
+export const DashUtils = load<IDashUtilsModule>('dash_utils');
 
-export const Greeter = dashUtils.Greeter;
-export const hello = dashUtils.hello;
+// export const Greeter = dashUtils.Greeter;
+// export const hello = dashUtils.hello;

@@ -2,15 +2,25 @@
 
 using namespace Napi;
 
-Napi::Object Init(Napi::Env env, Napi::Object exports)
+DashUtils::DashUtils(Env env, Object exports)
 {
-    exports.Set(Napi::String::New(env, "hello"), Napi::Function::New(env, Method));
-    auto s = fmt::format("The answer is {}.", 42);
-    std::cout << "String is  : " << s << std::endl;
+    n = 40;
+    auto increment = InstanceMethod("increment", &DashUtils::Increment);
+    auto decrement = InstanceMethod("decrement", &DashUtils::Decrement);
+    auto subobjectProp = DefineProperties(Object::New(env), {decrement});
+    auto subobject = InstanceValue("subobject", subobjectProp, napi_enumerable);
 
-    Napi::String name = Napi::String::New(env, "Greeter");
-    exports.Set(name, Greeter::GetClass(env));
-    return exports;
+    DefineAddon(exports, {increment, subobject});
 }
 
-NODE_API_MODULE(dash_utils, Init)
+Value DashUtils::Increment(const CallbackInfo &info)
+{
+    return Number::New(info.Env(), ++n);
+}
+
+Value DashUtils::Decrement(const CallbackInfo &info)
+{
+    return Number::New(info.Env(), --n);
+}
+
+NODE_API_ADDON(DashUtils);

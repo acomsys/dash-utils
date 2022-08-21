@@ -1,11 +1,15 @@
 #pragma once
+#include <napi.h>
 
-#include <fmt/core.h>
-#include <string>
-#include <iostream>
+using namespace Napi;
 
-#include "napi.h"
-#include "hello/hello.h"
-#include "greeter/greeter.h"
+class DashUtils : public Addon<DashUtils>{
+    public:
+    DashUtils(Env env, Object exports);
 
-Napi::Object Init(Napi::Env env, Napi::Object exports);
+    Value Increment(const CallbackInfo& info);
+    Value Decrement(const CallbackInfo& info);
+
+    private:
+    uint32_t n;
+};
