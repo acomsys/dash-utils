@@ -101,12 +101,16 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          path: prebuilds/@acomsys
+          name: artifact-macos-latest-binary
+          path: artifacts
 
       - name: Check artifacts
         run: |
+          mkdir -p prebuilds/@acomsys
+          find artifacts/builds -mindepth 2 -type f -print -exec mv {} prebuilds/@acomsys \;
           ls -lha .
           ls -lha prebuilds
+          ls -lha artifacts/builds
           ls -lha prebuilds/@acomsys
 
       # - name: Deploy to npm
