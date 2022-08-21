@@ -2,8 +2,9 @@ import fs from 'fs'
 import path from 'path'
 
 const paths = [
-    `../../../build/Release`, // happens when in client mode
-    `../build/Release`, // happens during local mode
+    `../../../build/Release`,
+    `../../build/Release`,
+    `../build/Release`,
 ]
 
 export const load = <T>(name: string) => {

@@ -1,18 +1,16 @@
 {
   "name": "@acomsys/dash-utils",
-  "version": "0.0.17",
+  "version": "0.0.16",
   "description": "A set of utilities used by the acomsys dash project.",
   "scripts": {
     "test": "npm run ntest && npm run gtest",
     "ntest": "vitest run",
-    "gtest": "(cmake -S . -B build && cmake --build build && cd build && ctest)",
+    "gtest": "npm run prebuild && (cd build && ctest)",
     "coverage": "vitest run --coverage",
     "build": "npm run prebuild && npm run build:ts",
     "build:ts": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "build:cmake": "rm -rf build && cmake-js build",
     "prepublish": "npm run build:ts",
-    "install": "prebuild-install --backend cmake-js --runtime napi || npm run rebuild",
-    "rebuild": "npm run build:cmake",
+    "install": "prebuild-install --backend cmake-js --runtime napi || npm run build",
     "prebuild": "prebuild --backend cmake-js --runtime napi --all --strip --verbose",
     "upload": "prebuild --backend cmake-js --runtime napi --all --strip --verbose --upload-all ${GITHUB_TOKEN}"
   },
