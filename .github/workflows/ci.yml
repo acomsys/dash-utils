@@ -92,6 +92,9 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Prep artifact directory
+        run: prebuilds/@acomsys
+
       - name: Install Depedendencies
         run: npm ci
 
@@ -103,6 +106,9 @@ jobs:
       - name: Check artifacts
         run: |
           ls -lha .
+          ls -lha artifact-macos-latest-binary
+          ls -lha artifact-ubuntu-latest-binary
+          ls -lha artifact-windows-latest-binary
           ls -lha prebuilds
           ls -lha prebuilds/@acomsys
 
