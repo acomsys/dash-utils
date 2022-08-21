@@ -1,6 +1,6 @@
 {
   "name": "@acomsys/dash-utils",
-  "version": "0.0.16",
+  "version": "0.0.15",
   "description": "A set of utilities used by the acomsys dash project.",
   "scripts": {
     "test": "vitest run",
